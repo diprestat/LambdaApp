@@ -1,5 +1,6 @@
 package com.core.lambdaapp;
 
+import android.content.Context;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -9,13 +10,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.os.Debug;
+import android.os.PowerManager;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity {
 
-    private StructuresManager manager;
+    private StructuresManager structureManager;
+    private LockManager lockManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +36,10 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        manager = new StructuresManager();
+        structureManager = new StructuresManager();
+        lockManager = new LockManager((PowerManager)getSystemService(Context.POWER_SERVICE));
+        lockManager.acquire();
+        lockManager.release();
     }
 
     @Override

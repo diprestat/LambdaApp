@@ -19,10 +19,10 @@ public class MainActivity extends AppCompatActivity {
 
     private StructuresManager structureManager;
     private LockManager lockManager;
+    private FaultyView faultyCanvas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Debug.startMethodTracing("sample");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -40,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         lockManager = new LockManager((PowerManager)getSystemService(Context.POWER_SERVICE));
         lockManager.acquire();
         lockManager.release();
+
+        //faultyCanvas = (FaultyView) findViewById(R.id.faulty_canvas);
     }
 
     @Override
@@ -60,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onDestroy() {
         System.out.println("Au revoir");
         super.onDestroy();
-
-        Debug.stopMethodTracing();
     }
 
     @Override
